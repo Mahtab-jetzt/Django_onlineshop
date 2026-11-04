@@ -1,0 +1,42 @@
+# Virtual environments
+/venv/
+/.venv/
+/env/
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+
+# Django
+db.sqlite3
+*.sqlite3
+/media/
+/staticfiles/
+local_settings.py
+celerybeat-schedule
+
+# Testing / Linting
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+coverage.xml
+htmlcov/
+.tox/
+*.log
+
+# Environment variables
+.env
+.env.*
+!.env.example
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db

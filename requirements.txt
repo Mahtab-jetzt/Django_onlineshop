@@ -1,0 +1,7 @@
+django
+djangorestframework
+pillow
+drf-spectacular
+djangorestframework-simplejwt
+django-filter
+python-dotenv
