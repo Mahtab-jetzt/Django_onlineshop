@@ -8,12 +8,12 @@ class Order(models.Model):
         PENDING = 'pending', 'Pending'
         PROCESSING = 'processing', 'Processing'
         SHIPPED = 'shipped', 'Shipped'
-        DELIVERD = 'deliverd', 'Deliverd'
+        DELIVERED = 'delivered', 'Delivered'
         CANCELLED = 'cancelled', 'Cancelled'
 
     #a user can have multiple orders
     user = models.ForeignKey(
-        'users.User',
+        'users.user',
         on_delete=models.PROTECT,
         related_name='orders'
     )
@@ -43,7 +43,7 @@ class Order(models.Model):
     recipient_name = models.CharField(max_length=150)
     phone_number = models.CharField(max_length=11)
     shipping_address = models.TextField()
-    postal_video = models.CharField(max_length=20)
+    postal_code = models.CharField(max_length=20)
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -53,33 +53,44 @@ class Order(models.Model):
 
 
 
-    class OrderItem(models.Model):
+class OrderItem(models.Model):
     #each order has multiple orderitems 
-        Order = models.ForeignKey(
-            Order,
-            on_delete=models.CASCADE,
-            related_name='items'
-        )
+    Order = models.ForeignKey(
+        Order,
+        on_delete=models.CASCADE,
+        related_name='items'
+    )
 
     #each product can have multiple orderitems(order item is a table in database)
     #ex. 2 people buying the same procut at the same time
-        product = models.ForeignKey(
-            'products.Product',
-            on_delete=models.PROTECT,
-            related_name='Order_items'
-        )
+    product = models.ForeignKey(
+        'products.Product',
+        on_delete=models.PROTECT,
+        related_name='order_items'
+    )
 
     #purchase time
-        product_name = models.CharField(max_length=200)
-        product_sku = models.CharField(max_length=50)
+    product_name = models.CharField(max_length=200)
+    product_sku = models.CharField(max_length=50)
 
-        unit_price = models.DecimalField(
-            max_digits=12,
-            decimal_places=0
-        )
+    unit_price = models.DecimalField(
+        max_digits=12,
+        decimal_places=0
+    )
 
-        quantity = models.PositiveIntegerField()
+    quantity = models.PositiveIntegerField()
 
-        def __str__(self):
-            return f"{self.product_name} x {self.quantity}"
+    # Product information saved at purchase time.
+    #so the recipt stays the same even after future updates
+    product_name = models.CharField(max_length=200)
+    product_sku = models.CharField(max_length=50)
+
+    # Price per unit at the time of purchase.
+    unit_price = models.DecimalField(
+        max_digits=12,
+        decimal_places=0
+    )
+
+    def __str__(self):
+        return f"{self.product_name} x {self.quantity}"
 

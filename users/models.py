@@ -7,7 +7,7 @@ class user(AbstractUser):
         verbose_name = 'Email Address'
     )
 
-class profile(models.Model):
+class Profile(models.Model):
     user = models.OneToOneField(
         'users.user',
         on_delete = models.CASCADE,
@@ -16,12 +16,11 @@ class profile(models.Model):
 
     phone_number = models.CharField(
         max_length = 11,
-        blank = True,
-        null = True
+        blank = True
     )
 
     avatar = models.ImageField(
-        upload_to = 'profile_imags/',
+        upload_to = 'profile_images/',
         blank=True,
         null=True
     )

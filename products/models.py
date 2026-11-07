@@ -13,8 +13,7 @@ class Category(models.Model):
     )
 
     description = models.TextField(
-        blank=True,
-        null=True
+        blank=True
     )
 
     parent = models.ForeignKey( 
@@ -32,7 +31,7 @@ class Category(models.Model):
     def __str__(self):
         return self.name
 
-class Product(models.model):
+class Product(models.Model):
 
     name = models.CharField(
         max_length=200
@@ -57,11 +56,11 @@ class Product(models.model):
         decimal_places=0
     )
 
-    stock  = models.PositiveBigIntegerField(
+    stock = models.PositiveIntegerField(
         default=0
     )
 
-    Category = models.ForeignKey(
+    category = models.ForeignKey(
         Category,
         on_delete=models.PROTECT,
         related_name='products'
@@ -113,9 +112,9 @@ class ProductImages(models.Model):
 
     created_at = models.DateTimeField(auto_now_add=True)
 
-    class meta:
+    class Meta:
 
-        ordering = ['set_order', id]
+        ordering = ['sort_order', 'id'] 
 
         constraints = [
 

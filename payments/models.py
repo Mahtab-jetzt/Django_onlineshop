@@ -16,7 +16,7 @@ class Payment(models.Model):
     order = models.ForeignKey(
         'orders.Order',
         on_delete=models.PROTECT,
-        related_name='payment'
+        related_name='payments'
     )
 
     amount = models.DecimalField(
@@ -24,17 +24,17 @@ class Payment(models.Model):
         decimal_places=0
     )
 
-    Status = models.CharField(
+    status = models.CharField(
         max_length=20,
         choices=Status.choices,
         default=Status.PENDING
     )
 
     #payment gateway information(saved in database)
-    gateway = models.CharField(
-        max_length=100,
-        blank=True,
-        null=True
+    Provider = models.CharField(
+        max_length=20,
+        choices = Provider.choices,
+        default= Provider.ZARINPAL
     )
 
     transaction_id = models.CharField(
