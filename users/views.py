@@ -1,5 +1,8 @@
 from rest_framework import generics
-from rest_framework.permissions import AllowAny
+from rest_framework.permissions import AllowAny, IsAuthenticated
+#for profile class in model
+from .models import Profile
+from .serializers import ProfileSerializer
 
 from .serializers import RegisterSerializer
 
@@ -30,3 +33,12 @@ class LogoutView(generics.GenericAPIView):
         )
 
 
+class ProfileView(generics.RetrieveUpdateAPIView):
+    serializer_class = ProfileSerializer
+    permission_classes = [IsAuthenticated]
+
+    def get_object(self):
+        profile, created = Profile.objects.get_or_create(
+            user=self.request.user
+        )
+        return profile
