@@ -132,6 +132,8 @@ class OrderItem(models.Model):
         decimal_places=0
     )
 
+    quantity = models.PositiveIntegerField()
+
 
     class Meta:
         constraints = [
