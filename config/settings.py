@@ -21,6 +21,7 @@ ALLOWED_HOSTS = [
         'ALLOWED_HOSTS',
         '127.0.0.1,localhost'
     ).split(',')
+    if host.strip()
 ]
 
 
@@ -38,6 +39,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'drf_spectacular',
     'rest_framework_simplejwt',
+    'rest_framework_simplejwt.token_blacklist',
     'django_filters',
 
     #apps
@@ -48,7 +50,7 @@ INSTALLED_APPS = [
     'payments',
 ]
 
-AUTH_USER_MODEL = 'users.User'
+AUTH_USER_MODEL = 'users.user'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -126,6 +128,9 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/6.1/howto/static-files/
 
 STATIC_URL = 'static/'
+STATIC_ROOT = BASE_DIR / 'staticfiles'
+MEDIA_URL = 'media/'
+MEDIA_ROOT = BASE_DIR / 'media'
 
 
 # Email configuration
@@ -170,6 +175,8 @@ SIMPLE_JWT = {
     'ROTATE_REFRESH_TOKENS': True,
 
     'UPDATE_LAST_LOGIN': True,
+
+    'BLACKLIST_AFTER_ROTATION': True,
 }
 
 #drf_spectacular
