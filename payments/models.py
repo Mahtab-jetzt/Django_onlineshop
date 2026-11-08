@@ -1,6 +1,5 @@
 from django.db import models
 
-
 class Payment(models.Model):
 
     class Provider(models.TextChoices):
@@ -31,7 +30,7 @@ class Payment(models.Model):
     )
 
     #payment gateway information(saved in database)
-    Provider = models.CharField(
+    provider = models.CharField(
         max_length=20,
         choices = Provider.choices,
         default= Provider.ZARINPAL
@@ -50,6 +49,23 @@ class Payment(models.Model):
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        constraints = [
+            models.CheckConstraint(
+                condition=models.Q(amount__gt=0),
+                name='payment_amount_gt_zero'
+            ),
+            models.CheckConstraint(
+                condition=models.Q(status__in=[
+                    'pending',
+                    'successful',
+                    'failed',
+                    'refunded'
+                ]),
+                name='payment_status_valid'
+            ),
+        ]
 
     def __str__(self):
         return f"payment for order{self.order.order_number}"
