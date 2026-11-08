@@ -1,12 +1,11 @@
 from rest_framework import serializers
-from .models import user
+from .models import user, Profile
 
 from django.contrib.auth import password_validation
 from django.core.exceptions import ValidationError as DjangoValidationError
 
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework_simplejwt.exceptions import TokenError
-
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -101,3 +100,24 @@ class LogoutSerializer(serializers.Serializer):
         self.token.blacklist()
 
 
+#for profile class in user model
+class ProfileSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Profile
+
+        fields = [
+            'id',
+            'user',
+            'phone_number',
+            'avatar',
+            'created_at',
+            'updated_at',
+        ]
+
+        read_only_fields = [
+            'id',
+            'user',
+            'created_at',
+            'updated_at',
+        ]
