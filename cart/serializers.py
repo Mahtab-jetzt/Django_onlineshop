@@ -6,9 +6,10 @@ from products.serializers import ProductSerializer
 
 
 class CartItemSerializer(serializers.ModelSerializer):
-
+    #display all product information in API response
     product = ProductSerializer(read_only=True)
 
+    #get the product id when creating a cart item
     product_id = serializers.PrimaryKeyRelatedField(
         queryset=Product.objects.all(),
         source='product',
@@ -33,6 +34,31 @@ class CartItemSerializer(serializers.ModelSerializer):
             'updated_at',
         ]
 
+    def validate(self, attrs):
+        #get the product from incoming data 
+        product = attrs.get(
+            'product',
+            getattr(self.instance, 'product', None)
+        )
+
+        #get the requsted quantity or keep the current quantity
+        quantity = attrs.get(
+            'quantity',
+            getattr(self.instance, 'quantity', 1)
+        )
+
+        #reject inactive products
+        if product and not product.is_active:
+            raise serializers.ValidationError({
+                'product_id': 'This product is not available.'
+            })
+
+        #reject quantities greater than available stock
+        if product and quantity > product.stock:
+            raise serializers.ValidationError({
+                'quantity': 'Requested quantity exceeds available stock.'
+            })
+        return attrs
 
 class CartSerializer(serializers.ModelSerializer):
     #display all items on the cart
@@ -67,3 +93,4 @@ class CartSerializer(serializers.ModelSerializer):
         for item in obj.items.select_related('product').all():
             total += item.product.price*item.quantity
             return total
+    
