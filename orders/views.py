@@ -140,3 +140,19 @@ class OrderHistoryView(generics.ListAPIView):
         return Order.objects.filter(
             user=self.request.user
         ).prefetch_related('items').order_by('-created_at')
+
+
+class OrderDetailView(generics.RetrieveAPIView):
+    # Serializer used to display the complete order details
+    serializer_class = OrderSerializer
+
+    # Only authenticated users can view order details
+    permission_classes = [IsAuthenticated]
+
+    def get_queryset(self):
+        # Return only orders belonging to the logged-in user
+        return Order.objects.filter(
+            user=self.request.user
+        ).prefetch_related('items')
+
+
