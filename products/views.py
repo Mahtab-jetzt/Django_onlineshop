@@ -1,8 +1,9 @@
 from rest_framework.viewsets import ModelViewSet
 
-from .models import Category, Product
-from .serializers import CategorySerializer, ProductSerializer
+from .models import Category, Product, ProductImage
+from .serializers import CategorySerializer, ProductSerializer, ProductImageSerializer
 
+#permission
 from .permissions import IsAdminOrReadOnly
 
 #for serch and filter
@@ -10,8 +11,11 @@ from rest_framework.filters import SearchFilter, OrderingFilter
 from django_filters.rest_framework import DjangoFilterBackend
 from .filters import ProductFilter
 
+#pagination
 from .pagination import ProductPagination
 
+#images 
+from rest_framework.parsers import MultiPartParser, FormParser
 
 class CategoryViewSet(ModelViewSet):
 
@@ -52,3 +56,17 @@ ordering_fields = [
 ]
 
 ordering = ['-created_at']
+
+#images view
+class ProductImageViewSet(ModelViewSet):
+
+    # Retrieve images along with their related products
+    queryset = ProductImage.objects.select_related('product').all()
+
+    serializer_class = ProductImageSerializer
+
+    # Restrict image modifications to staff users
+    permission_classes = [IsAdminOrReadOnly]
+
+    # Support multipart and form-based file uploads
+    parser_classes = [MultiPartParser, FormParser]

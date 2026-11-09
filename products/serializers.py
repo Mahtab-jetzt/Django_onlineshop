@@ -98,3 +98,43 @@ class ProductSerializer(serializers.ModelSerializer):
             )
 
         return value
+
+
+class ProductImageSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = ProductImage
+
+        fields = [
+            'id',
+            'product',
+            'image',
+            'alt_text',
+            'is_primary',
+            'sort_order',
+            'created_at',
+        ]
+
+        read_only_fields = [
+            'id',
+            'created_at',
+        ]
+
+    def validate(self, attrs):
+        product = attrs.get(
+            'product',
+            getattr(self.instance, 'product', None)
+        )
+
+        is_primary = attrs.get(
+            'is_primary',
+            getattr(self.instance, 'is_primary', False)
+        )
+
+        # Prevent assigning a primary image to an inactive product
+        if is_primary and product and not product.is_active:
+            raise serializers.ValidationError({
+                'product': 'Cannot assign a primary image to an inactive product.'
+            })
+
+        return attrs
