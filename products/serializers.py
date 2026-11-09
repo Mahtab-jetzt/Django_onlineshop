@@ -52,3 +52,49 @@ class CategorySerializer(serializers.ModelSerializer):
             parent = parent.parent
 
         return value
+
+from .models import Category, Product, ProductImage
+
+
+class ProductSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Product
+
+        fields = [
+            'id',
+            'name',
+            'slug',
+            'sku',
+            'description',
+            'price',
+            'stock',
+            'category',
+            'is_active',
+            'created_at',
+            'updated_at',
+        ]
+
+        read_only_fields = [
+            'id',
+            'slug',
+            'sku',
+            'created_at',
+            'updated_at',
+        ]
+
+    def validate_price(self, value):
+        if value <= 0:
+            raise serializers.ValidationError(
+                'Price must be greater than zero.'
+            )
+
+        return value
+
+    def validate_category(self, value):
+        if not value.is_active:
+            raise serializers.ValidationError(
+                'Products cannot belong to an inactive category.'
+            )
+
+        return value
