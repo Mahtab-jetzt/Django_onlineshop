@@ -109,3 +109,6 @@ class CheckoutView(generics.GenericAPIView):
 
             #save the updated stock
             product.save(update_fields=['stock'])
+
+            #empty the cart after purchase
+            user_cart.items.all().delete()
