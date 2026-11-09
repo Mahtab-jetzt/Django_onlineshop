@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import CartDetailView, CartItemCreateView, CartItemUpdateView
+from .views import CartDetailView, CartItemCreateView, CartItemUpdateView, CartItemDeleteView
 
 
 urlpatterns = [
@@ -11,5 +11,8 @@ urlpatterns = [
 
     #update the quantity of acart item
     path('items/<int:pk>/', CartItemUpdateView.as_view(), name='cart-item-update'),
+
+    #remove an item from cart
+    path('items/<int:pk>/delete/', CartItemDeleteView.as_view(), name='cart-item-delete'),
 ]
 

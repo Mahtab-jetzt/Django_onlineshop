@@ -46,4 +46,17 @@ class CartItemUpdateView(generics.UpdateAPIView):
         )
 
 
+class CartItemDeleteView(generics.DestroyAPIView):
+    # Use the CartItem model to find the item to delete
+    queryset = CartItem.objects.all()
+
+    # No serializer is needed for deleting an item
+    permission_classes = [IsAuthenticated]
+
+    # Allow users to delete items only from their own cart
+    def get_queryset(self):
+        return CartItem.objects.filter(
+            cart__user=self.request.user
+        )
+
 
