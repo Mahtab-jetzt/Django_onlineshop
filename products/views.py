@@ -10,18 +10,24 @@ from rest_framework.filters import SearchFilter, OrderingFilter
 from django_filters.rest_framework import DjangoFilterBackend
 from .filters import ProductFilter
 
+from .pagination import ProductPagination
+
 
 class CategoryViewSet(ModelViewSet):
 
     queryset = Category.objects.all()
     serializer_class = CategorySerializer
+
     permission_classes = [IsAdminOrReadOnly]
 
 class ProductViewSet(ModelViewSet):
 
     queryset = Product.objects.select_related('category').all()
-    serializer_class = ProductSerializer
+    serializer_class = ProductSerializer 
+
     permission_classes = [IsAdminOrReadOnly]
+
+    pagination_class = ProductPagination
 
 
 filter_backends = [
