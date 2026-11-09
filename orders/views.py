@@ -51,3 +51,14 @@ class CheckoutView(generics.GenericAPIView):
                 })
 
             total_price += product.price * item.quantity
+
+    
+        # Create the main order using validated shipping information
+        order = Order.objects.create(
+            user=request.user,
+            total_price=total_price,
+            recipient_name=serializer.validated_data['recipient_name'],
+            phone_number=serializer.validated_data['phone_number'],
+            shipping_address=serializer.validated_data['shipping_address'],
+            postal_code=serializer.validated_data['postal_code'],
+        )
