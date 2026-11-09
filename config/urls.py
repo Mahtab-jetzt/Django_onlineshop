@@ -1,10 +1,10 @@
 from django.contrib import admin
 from django.urls import path, include
 from django.http import JsonResponse
-from drf_spectacular.views import (
-    SpectacularAPIView,
-    SpectacularSwaggerView,
-)
+from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView
+
+from django.conf import settings
+from django.conf.urls.static import static
 
 
 def health(request):
@@ -32,3 +32,11 @@ urlpatterns = [
     # Health check
     path('health/', health, name='health'),
 ]
+
+#media
+if settings.DEBUG:
+    urlpatterns += static(
+        settings.MEDIA_URL,
+
+document_root = settings.MEDIA_ROOT
+    )
