@@ -8,6 +8,8 @@ from cart.models import cart
 from .models import Order, OrderItem
 from .serializers import CheckoutSerializer
 
+from products.models import Product
+
 
 class CheckoutView(generics.GenericAPIView):
     # Validate the shipping information sent by the customer
@@ -32,6 +34,30 @@ class CheckoutView(generics.GenericAPIView):
             raise ValidationError({
                 'cart': 'Your cart is empty.'
             })
+
+        # Lock cart items while processing the checkout
+        cart_items = list(
+            user_cart.items.select_related('product').all()
+        )
+
+        if not cart_items:
+            raise ValidationError({
+                'cart': 'Your cart is empty.'
+            })
+
+        # Collect product IDs from the cart
+        product_ids = [item.product_id for item in cart_items]
+
+        # Lock product rows to prevent concurrent stock updates
+        locked_products = Product.objects.select_for_update().filter(
+            id__in=product_ids
+        ).order_by('id')
+
+        # Build a dictionary for quick product lookup
+        products = {
+            product.id: product
+            for product in locked_products
+        }
 
         # Calculate the order total using current database prices
         total_price = 0
