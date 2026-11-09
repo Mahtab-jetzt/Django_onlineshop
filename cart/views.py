@@ -2,6 +2,7 @@ from rest_framework import generics, status
 from rest_framework.permissions import IsAuthenticated
 
 from .models import cart, CartItem
+from products.models import Product
 from .serializers import CartSerializer, CartItemSerializer
 
 from rest_framework.response import Response
@@ -36,7 +37,7 @@ class CartItemCreateView(generics.CreateAPIView):
         product = serializer.validated_data['product']
         requested_quantity = serializer.validated_data['quantity']
         #lock the product row to prevent cocurrent stock changes
-        product = product.objects.select_for_update().get(
+        product = Product.objects.select_for_update().get(
             pk = product.pk
         )
 
@@ -68,6 +69,7 @@ class CartItemCreateView(generics.CreateAPIView):
         if cart_item:
             cart_item.quantity = total_quantity
             cart_item.save(update_fields=['quantity', 'updated_at'])
+            serializer.instance = cart_item
 
         else:
             # Create a new cart item if the product is not already in the cart
@@ -75,18 +77,8 @@ class CartItemCreateView(generics.CreateAPIView):
                 cart=user_cart,
                 product=product
             )
+
     
-
-    def perform_create(self, serializer):
-        # Get or create the cart belonging to the logged-in user
-        user_cart, created = cart.objects.get_or_create(
-            user=self.request.user
-        )
-
-        # Save the new cart item inside the user's cart
-        serializer.save(cart=user_cart)
-
-
 class CartItemUpdateView(generics.UpdateAPIView):
     # Use CartItemSerializer to validate and update cart item data
     serializer_class = CartItemSerializer

@@ -1,4 +1,3 @@
-
 from django.db import transaction
 from rest_framework import generics, status
 from rest_framework.permissions import IsAuthenticated
@@ -64,8 +63,8 @@ class CheckoutView(generics.GenericAPIView):
         # Calculate the order total using current database prices
         total_price = 0
 
-        for item in user_cart.items.all():
-            product = item.product
+        for item in cart_items:
+            product = products[item.product_id]
 
             # Reject inactive products or insufficient stock
             if not product.is_active:
@@ -92,10 +91,9 @@ class CheckoutView(generics.GenericAPIView):
         )
 
         
-        # Create one OrderItem for each product in the cart
-        for item in user_cart.items.select_related('product').all():
-            product = item.product
-
+        for item in cart_items:
+            product = products[item.product_id]
+        
             #snapshot 
             OrderItem.objects.create(
                 Order=order,
@@ -112,8 +110,9 @@ class CheckoutView(generics.GenericAPIView):
             #save the updated stock
             product.save(update_fields=['stock'])
 
-            #empty the cart after purchase
-            user_cart.items.all().delete()
+        #empty the cart after purchase
+        user_cart.items.all().delete()
+
         
         # Return the successful order information to the customer
         return Response(
