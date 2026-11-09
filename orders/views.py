@@ -6,7 +6,7 @@ from rest_framework.exceptions import ValidationError
 
 from cart.models import cart
 from .models import Order, OrderItem
-from .serializers import CheckoutSerializer
+from .serializers import CheckoutSerializer, OrderSerializer
 
 from products.models import Product
 
@@ -126,3 +126,17 @@ class CheckoutView(generics.GenericAPIView):
             },
             status=status.HTTP_201_CREATED
         )
+
+    
+class OrderHistoryView(generics.ListAPIView):
+    # Use the serializer that displays order details
+    serializer_class = OrderSerializer
+
+    # Only authenticated users can view their orders
+    permission_classes = [IsAuthenticated]
+
+    def get_queryset(self):
+        # Return only orders belonging to the logged-in user
+        return Order.objects.filter(
+            user=self.request.user
+        ).prefetch_related('items').order_by('-created_at')

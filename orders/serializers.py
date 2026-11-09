@@ -1,7 +1,7 @@
 
 from rest_framework import serializers
 
-from .models import phone_number_validator, postal_code_validator
+from .models import phone_number_validator, postal_code_validator, Order, OrderItem
 
 
 class CheckoutSerializer(serializers.Serializer):
@@ -34,3 +34,40 @@ class CheckoutSerializer(serializers.Serializer):
             )
 
         return value.strip()
+
+#order history
+class OrderItemSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = OrderItem
+
+        # Return the purchased product details and price snapshot
+        fields = [
+            'id',
+            'product',
+            'product_name',
+            'product_sku',
+            'unit_price',
+            'quantity',
+        ]
+
+
+class OrderSerializer(serializers.ModelSerializer):
+    # Include all items belonging to this order
+    items = OrderItemSerializer(many=True, read_only=True)
+
+    class Meta:
+        model = Order
+
+        # Return order information and its purchased items
+        fields = [
+            'id',
+            'order_number',
+            'status',
+            'total_price',
+            'recipient_name',
+            'phone_number',
+            'shipping_address',
+            'postal_code',
+            'items',
+            'created_at',
+        ]
