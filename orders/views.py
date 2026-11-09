@@ -68,6 +68,7 @@ class CheckoutView(generics.GenericAPIView):
         for item in user_cart.items.select_related('product').all():
             product = item.product
 
+            #snapshot 
             OrderItem.objects.create(
                 Order=order,
                 product=product,
@@ -76,3 +77,9 @@ class CheckoutView(generics.GenericAPIView):
                 unit_price=product.price,
                 quantity=item.quantity,
             )
+
+            #reduce stock after purchase
+            product.stock -= item.quantity
+
+            #save the updated stock
+            product.save(update_fields=['stock'])
