@@ -1,6 +1,6 @@
 
 from django.db import transaction
-from rest_framework import generics
+from rest_framework import generics, status
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.exceptions import ValidationError
 
@@ -9,6 +9,8 @@ from .models import Order, OrderItem
 from .serializers import CheckoutSerializer
 
 from products.models import Product
+
+from rest_framework.response import Response
 
 
 class CheckoutView(generics.GenericAPIView):
@@ -112,3 +114,15 @@ class CheckoutView(generics.GenericAPIView):
 
             #empty the cart after purchase
             user_cart.items.all().delete()
+        
+        # Return the successful order information to the customer
+        return Response(
+            {
+                'message': 'Your order was created successfully.',
+                'order_id': order.id,
+                'order_number': str(order.order_number),
+                'total_price': str(order.total_price),
+                'status': order.status,
+            },
+            status=status.HTTP_201_CREATED
+        )
