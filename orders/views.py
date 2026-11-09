@@ -62,3 +62,17 @@ class CheckoutView(generics.GenericAPIView):
             shipping_address=serializer.validated_data['shipping_address'],
             postal_code=serializer.validated_data['postal_code'],
         )
+
+        
+        # Create one OrderItem for each product in the cart
+        for item in user_cart.items.select_related('product').all():
+            product = item.product
+
+            OrderItem.objects.create(
+                Order=order,
+                product=product,
+                product_name=product.name,
+                product_sku=product.sku,
+                unit_price=product.price,
+                quantity=item.quantity,
+            )
