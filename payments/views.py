@@ -12,12 +12,27 @@ from orders.models import Order
 
 from .models import Payment
 from .serializers import PaymentSerializer
-from .services import (
-    create_payment_attempt,
-    mark_payment_failed,
-    mark_payment_successful,
-)
+from .services import create_payment_attempt, mark_payment_failed, mark_payment_successful
 
+def extract_gateway_data(response):
+    # Raise an exception for unsuccessful HTTP responses.
+    response.raise_for_status()
+
+    # Parse the JSON response.
+    result = response.json()
+
+    # The gateway response must be a JSON object.
+    if not isinstance(result, dict):
+        raise ValueError('Invalid gateway response format.')
+
+    # Extract the data section.
+    data = result.get('data') or {}
+
+    # The data section must also be a JSON object.
+    if not isinstance(data, dict):
+        raise ValueError('Invalid gateway data format.')
+
+    return data
 
 class PaymentStartView(APIView):
     # Only authenticated users can start a payment.
@@ -83,8 +98,7 @@ class PaymentStartView(APIView):
                 timeout=15,
             )
 
-            gateway_response.raise_for_status()
-            result = gateway_response.json()
+            data = extract_gateway_data(gateway_response)
 
         except (requests.RequestException, ValueError):
             # Mark the attempt as failed if the gateway request fails.
@@ -96,11 +110,14 @@ class PaymentStartView(APIView):
             )
 
         # Extract the response data from Zarinpal.
-        data = result.get('data') or {}
         authority = data.get('authority')
 
         # Code 100 means the payment request was created successfully.
-        if data.get('code') != 100 or not authority:
+        if (
+            data.get('code') != 100
+            or not isinstance(authority, str)
+            or not authority.strip()
+        ):
 
             mark_payment_failed(payment.id)
 
@@ -141,6 +158,13 @@ class PaymentVerifyView(APIView):
         authority = request.query_params.get('Authority')
         gateway_status = request.query_params.get('Status')
 
+        # Payment verification requires configured gateway credentials.
+        if not settings.ZARINPAL_MERCHANT_ID:
+            return Response(
+                {'detail': 'Zarinpal Merchant ID is not configured.'},
+                status=status.HTTP_503_SERVICE_UNAVAILABLE,
+            )
+        
         if not authority:
             return Response(
                 {'detail': 'Missing payment authority.'},
@@ -157,6 +181,24 @@ class PaymentVerifyView(APIView):
             return Response(
                 {'detail': 'Payment not found.'},
                 status=status.HTTP_404_NOT_FOUND,
+            )
+
+        #a payment must have a seved authority brfore verification
+        if not payment.authority:
+            return Response(
+                {'detail': 'payment authority is missing.'},
+                status=status.HTTP_400_BAD_REQUEST,
+            )
+
+        
+        # Avoid verifying an already successful payment again.
+        if payment.status == Payment.Status.SUCCESSFUL:
+            return Response(
+                {
+                    'detail': 'Payment was already verified.',
+                    'payment': PaymentSerializer(payment).data,
+                },
+                status=status.HTTP_200_OK,
             )
 
         # Handle cancelled or unsuccessful payments.
@@ -179,16 +221,6 @@ class PaymentVerifyView(APIView):
                 status=status.HTTP_400_BAD_REQUEST,
             )
 
-        # Avoid verifying an already successful payment again.
-        if payment.status == Payment.Status.SUCCESSFUL:
-            return Response(
-                {
-                    'detail': 'Payment was already verified.',
-                    'payment': PaymentSerializer(payment).data,
-                },
-                status=status.HTTP_200_OK,
-            )
-
         # Prepare the verification request.
         payload = {
             'merchant_id': settings.ZARINPAL_MERCHANT_ID,
@@ -208,8 +240,7 @@ class PaymentVerifyView(APIView):
                 timeout=15,
             )
 
-            gateway_response.raise_for_status()
-            result = gateway_response.json()
+            data = extract_gateway_data(gateway_response)
 
         except (requests.RequestException, ValueError):
             # Keep the payment pending if verification cannot be completed.
@@ -218,7 +249,6 @@ class PaymentVerifyView(APIView):
                 status=status.HTTP_502_BAD_GATEWAY,
             )
 
-        data = result.get('data') or {}
         verification_code = data.get('code')
 
         # Code 100 means newly verified; 101 means already verified.

@@ -42,22 +42,26 @@ def create_payment_attempt(user, order_id):
 
     return payment
 
-
 @transaction.atomic
 def mark_payment_successful(payment_id, transaction_id):
+    # Read the order ID before locking the related records.
     payment_info = Payment.objects.only(
         'order_id'
     ).get(pk=payment_id)
 
+    # Lock the order first to prevent concurrent payment updates.
     order = Order.objects.select_for_update().get(
         pk=payment_info.order_id
     )
 
+    # Lock the payment while updating its status.
     payment = Payment.objects.select_for_update().get(
         pk=payment_id,
         order=order
     )
 
+    # Make the operation idempotent.
+    # Repeated callbacks must not update an already successful payment.
     if payment.status == Payment.Status.SUCCESSFUL:
         return payment
 
@@ -66,11 +70,13 @@ def mark_payment_successful(payment_id, transaction_id):
             'This payment has already been refunded.'
         )
 
+    # Only pending payments can become successful.
     if payment.status != Payment.Status.PENDING:
         raise ValidationError(
             'This payment is not pending.'
         )
 
+    # Prevent a second successful payment for the same order.
     if order.payments.filter(
         status=Payment.Status.SUCCESSFUL
     ).exclude(pk=payment.pk).exists():
@@ -78,6 +84,7 @@ def mark_payment_successful(payment_id, transaction_id):
             'Another payment for this order is already successful.'
         )
 
+    # Save the confirmed transaction details.
     payment.status = Payment.Status.SUCCESSFUL
     payment.transaction_id = transaction_id
     payment.paid_at = timezone.now()
@@ -89,6 +96,7 @@ def mark_payment_successful(payment_id, transaction_id):
         'updated_at'
     ])
 
+    # Move a pending order to processing after successful payment.
     if order.status == Order.Status.PENDING:
         order.status = Order.Status.PROCESSING
         order.save(update_fields=[
@@ -96,8 +104,11 @@ def mark_payment_successful(payment_id, transaction_id):
             'updated_at'
         ])
 
-    return payment
+    # If an order was cancelled before the callback arrived,
+    # keep its cancelled status. The successful payment must still
+    # be recorded and handled separately for a possible refund.
 
+    return payment
 
 @transaction.atomic
 def mark_payment_failed(payment_id, transaction_id=None):
