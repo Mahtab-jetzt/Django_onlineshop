@@ -70,6 +70,18 @@ class PaymentStartView(APIView):
                 status=status.HTTP_400_BAD_REQUEST,
             )
 
+        #reuse the existing gateway url if the payment was alread started
+        if payment.authority:
+            return Response({
+                'payment': PaymentSerializer(payment).data,
+                'payment_url': (
+                    f'{settings.ZARINPAL_STARTPAY_URL}'
+                    f'{payment.authority}'
+                ),
+            },
+            status= status.HTTP_200_OK,
+            )
+
         # Convert Toman to Rial because Zarinpal expects Rial.
         amount_in_rial = int(payment.amount) * 10
 
@@ -253,10 +265,12 @@ class PaymentVerifyView(APIView):
 
         # Code 100 means newly verified; 101 means already verified.
         if verification_code in (100, 101):
-
+            
+            #extract the transaction id from gateway response
             ref_id = data.get('ref_id')
 
-            if ref_id is None:
+            
+            if ref_id is None or not str(ref_id).strip():
                 return Response(
                     {
                         'detail': (

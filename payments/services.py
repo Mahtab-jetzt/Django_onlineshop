@@ -1,4 +1,3 @@
-
 from django.core.exceptions import ValidationError
 from django.db import transaction
 from django.utils import timezone
@@ -14,16 +13,19 @@ def create_payment_attempt(user, order_id):
         user=user
     )
 
+    #only pending orders can be paid
     if order.status != Order.Status.PENDING:
         raise ValidationError(
             'This order is not available for payment.'
         )
 
+    #the order amount must be greater than zero
     if order.total_price <= 0:
         raise ValidationError(
             'Order total price must be greater than zero.'
         )
 
+    #prevent creating another payment for an already paid order
     if order.payments.filter(
         status=Payment.Status.SUCCESSFUL
     ).exists():
@@ -31,6 +33,21 @@ def create_payment_attempt(user, order_id):
             'This order has already been paid.'
         )
 
+    #check whether an unfinished payment attempt already exists
+
+    existing_payment = order.payments.select_for_update().filter(
+        status=Payment.Status.PENDING).order_by('-created_at').first()
+
+    if existing_payment:
+        # Reuse an existing payment if it already has a gateway authority.
+        if existing_payment.authority:
+            return existing_payment
+        #dont create another attempt while the first one is processing
+        raise ValidationError(
+            'A payment attempt is already being processed.'
+        )
+    
+    #create a new payment attempt
     payment = Payment(
         order=order,
         amount=order.total_price,
