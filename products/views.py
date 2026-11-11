@@ -34,28 +34,28 @@ class ProductViewSet(ModelViewSet):
     pagination_class = ProductPagination
 
 
-filter_backends = [
-    DjangoFilterBackend,
-    SearchFilter,
-    OrderingFilter,
-]
+    filter_backends = [
+        DjangoFilterBackend,
+        SearchFilter,
+        OrderingFilter,
+    ]
 
-filterset_class = ProductFilter
+    filterset_class = ProductFilter
 
-#for search others for filter
-search_fields = [
-    'name',
-    'description',
-    'category__name',
-]
+    #for search others for filter
+    search_fields = [
+        'name',
+        'description',
+        'category__name',
+    ]
 
-ordering_fields = [
-    'price',
-    'created_at',
-    'name',
-]
+    ordering_fields = [
+        'price',
+        'created_at',
+        'name',
+    ]
 
-ordering = ['-created_at']
+    ordering = ['-created_at']
 
 #images view
 class ProductImageViewSet(ModelViewSet):

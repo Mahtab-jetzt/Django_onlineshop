@@ -92,5 +92,5 @@ class CartSerializer(serializers.ModelSerializer):
 
         for item in obj.items.select_related('product').all():
             total += item.product.price*item.quantity
-            return total
+        return total
     
