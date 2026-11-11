@@ -1,23 +1,39 @@
 {
   "info": {
     "_postman_id": "4bea8e65-00cc-4193-8209-fdd89f24a5db",
-    "name": "Django Online Shop - Authentication",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    "name": "Django online shop",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "60046057",
+    "_collection_link": "https://go.postman.co/collection/60046057-4bea8e65-00cc-4193-8209-fdd89f24a5db?source=collection_link"
   },
   "item": [
     {
-      "name": "Authentication & Profile",
+      "name": "Authentication",
       "item": [
         {
-          "name": "Register",
+          "name": "register",
           "request": {
             "method": "POST",
             "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"username\": \"testuser2\",\r\n    \"email\": \"test2@example.com\",\r\n    \"password\": \"SUV120120\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
             "url": {
-              "raw": "{{base_url}}/api/v1/users/register/",
+              "raw": "http://127.0.0.1:8000/api/v1/users/register/",
+              "protocol": "http",
               "host": [
-                "{{base_url}}"
+                "127",
+                "0",
+                "0",
+                "1"
               ],
+              "port": "8000",
               "path": [
                 "api",
                 "v1",
@@ -25,28 +41,33 @@
                 "register",
                 ""
               ]
-            },
-            "body": {
-              "mode": "raw",
-              "raw": "{\n    \"username\": \"testuser2\",\n    \"email\": \"test2@example.com\",\n    \"password\": \"{{test_password}}\"\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
             }
           },
           "response": [
             {
-              "name": "Register - 201 Created",
+              "name": "register",
               "originalRequest": {
                 "method": "POST",
                 "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"username\": \"testuser2\",\r\n    \"email\": \"test2@example.com\",\r\n    \"password\": \"SUV120120\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
                 "url": {
-                  "raw": "{{base_url}}/api/v1/users/register/",
+                  "raw": "http://127.0.0.1:8000/api/v1/users/register/",
+                  "protocol": "http",
                   "host": [
-                    "{{base_url}}"
+                    "127",
+                    "0",
+                    "0",
+                    "1"
                   ],
+                  "port": "8000",
                   "path": [
                     "api",
                     "v1",
@@ -54,15 +75,6 @@
                     "register",
                     ""
                   ]
-                },
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n    \"username\": \"testuser2\",\n    \"email\": \"test2@example.com\",\n    \"password\": \"{{test_password}}\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
                 }
               },
               "status": "Created",
@@ -70,8 +82,44 @@
               "_postman_previewlanguage": "json",
               "header": [
                 {
+                  "key": "Date",
+                  "value": "Sun, 08 Nov 2026 21:14:33 GMT"
+                },
+                {
+                  "key": "Server",
+                  "value": "WSGIServer/0.2 CPython/3.12.2"
+                },
+                {
                   "key": "Content-Type",
                   "value": "application/json"
+                },
+                {
+                  "key": "Vary",
+                  "value": "Accept"
+                },
+                {
+                  "key": "Allow",
+                  "value": "POST, OPTIONS"
+                },
+                {
+                  "key": "X-Frame-Options",
+                  "value": "DENY"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "59"
+                },
+                {
+                  "key": "X-Content-Type-Options",
+                  "value": "nosniff"
+                },
+                {
+                  "key": "Referrer-Policy",
+                  "value": "same-origin"
+                },
+                {
+                  "key": "Cross-Origin-Opener-Policy",
+                  "value": "same-origin"
                 }
               ],
               "cookie": [],
@@ -84,11 +132,25 @@
           "request": {
             "method": "POST",
             "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"username\": \"testuser2\",\r\n    \"password\": \"SUV120120\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
             "url": {
-              "raw": "{{base_url}}/api/v1/users/login/",
+              "raw": "http://127.0.0.1:8000/api/v1/users/login/",
+              "protocol": "http",
               "host": [
-                "{{base_url}}"
+                "127",
+                "0",
+                "0",
+                "1"
               ],
+              "port": "8000",
               "path": [
                 "api",
                 "v1",
@@ -96,28 +158,33 @@
                 "login",
                 ""
               ]
-            },
-            "body": {
-              "mode": "raw",
-              "raw": "{\n    \"username\": \"testuser2\",\n    \"password\": \"{{test_password}}\"\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
             }
           },
           "response": [
             {
-              "name": "Login - 200 OK",
+              "name": "Login",
               "originalRequest": {
                 "method": "POST",
                 "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"username\": \"testuser2\",\r\n    \"password\": \"SUV120120\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
                 "url": {
-                  "raw": "{{base_url}}/api/v1/users/login/",
+                  "raw": "http://127.0.0.1:8000/api/v1/users/login/",
+                  "protocol": "http",
                   "host": [
-                    "{{base_url}}"
+                    "127",
+                    "0",
+                    "0",
+                    "1"
                   ],
+                  "port": "8000",
                   "path": [
                     "api",
                     "v1",
@@ -125,15 +192,6 @@
                     "login",
                     ""
                   ]
-                },
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n    \"username\": \"testuser2\",\n    \"password\": \"{{test_password}}\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
                 }
               },
               "status": "OK",
@@ -141,25 +199,157 @@
               "_postman_previewlanguage": "json",
               "header": [
                 {
+                  "key": "Date",
+                  "value": "Sun, 08 Nov 2026 21:17:15 GMT"
+                },
+                {
+                  "key": "Server",
+                  "value": "WSGIServer/0.2 CPython/3.12.2"
+                },
+                {
                   "key": "Content-Type",
                   "value": "application/json"
+                },
+                {
+                  "key": "Vary",
+                  "value": "Accept"
+                },
+                {
+                  "key": "Allow",
+                  "value": "POST, OPTIONS"
+                },
+                {
+                  "key": "X-Frame-Options",
+                  "value": "DENY"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "489"
+                },
+                {
+                  "key": "X-Content-Type-Options",
+                  "value": "nosniff"
+                },
+                {
+                  "key": "Referrer-Policy",
+                  "value": "same-origin"
+                },
+                {
+                  "key": "Cross-Origin-Opener-Policy",
+                  "value": "same-origin"
                 }
               ],
               "cookie": [],
-              "body": "{\n  \"refresh\": \"<REFRESH_TOKEN>\",\n  \"access\": \"<ACCESS_TOKEN>\"\n}"
+              "body": "{\n  \"refresh\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTc5NDc3NzQzNSwiaWF0IjoxNzk0MTcyNjM1LCJqdGkiOiJjYTczNjkxNjdkMmY0OTA1YTU1M2FjODE0YjAxMGQzNCIsInVzZXJfaWQiOiIzIn0.mZt1gdx7kFFxxlkGIwD4neUXDnvTu0j1-TClJ_s24zU\",\n  \"access\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzk0MTczNTM1LCJpYXQiOjE3OTQxNzI2MzUsImp0aSI6IjQ2NTk3ZGI5MmFjNDQwNzc4MmYxZjgyZWE5MWE2MGEwIiwidXNlcl9pZCI6IjMifQ.pyqDAG-AMPuSRztRFVKq8JRb--1OQDZ9L58u_Xy8riY\"\n}"
+            },
+            {
+              "name": "Login2",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"username\": \"testuser2\",\r\n    \"password\": \"SUV120120\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://127.0.0.1:8000/api/v1/users/login/",
+                  "protocol": "http",
+                  "host": [
+                    "127",
+                    "0",
+                    "0",
+                    "1"
+                  ],
+                  "port": "8000",
+                  "path": [
+                    "api",
+                    "v1",
+                    "users",
+                    "login",
+                    ""
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Date",
+                  "value": "Tue, 10 Nov 2026 15:21:17 GMT"
+                },
+                {
+                  "key": "Server",
+                  "value": "WSGIServer/0.2 CPython/3.12.2"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                },
+                {
+                  "key": "Vary",
+                  "value": "Accept"
+                },
+                {
+                  "key": "Allow",
+                  "value": "POST, OPTIONS"
+                },
+                {
+                  "key": "X-Frame-Options",
+                  "value": "DENY"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "489"
+                },
+                {
+                  "key": "X-Content-Type-Options",
+                  "value": "nosniff"
+                },
+                {
+                  "key": "Referrer-Policy",
+                  "value": "same-origin"
+                },
+                {
+                  "key": "Cross-Origin-Opener-Policy",
+                  "value": "same-origin"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"refresh\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTc5NDkyODg3NywiaWF0IjoxNzk0MzI0MDc3LCJqdGkiOiJhYjMxOTdmZTAxYjc0MDNjYWYzZDI1ZDk4NTFhYjllYiIsInVzZXJfaWQiOiIzIn0.hAWabQatEI9wKWldjzKZLBhPJ0-asTv1TVdOrPRRSgc\",\n  \"access\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzk0MzI0OTc3LCJpYXQiOjE3OTQzMjQwNzcsImp0aSI6ImM5M2FlYTBjODI3NDQzODJhMDM1YmEzNDEyYWQ1YWY3IiwidXNlcl9pZCI6IjMifQ.BX_S6lr8kEYVJEUYRK9DVhcajMDT9xd_4Wa-ZRTdhWU\"\n}"
             }
           ]
         },
         {
-          "name": "Get Profile",
+          "name": "get profile",
           "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{json_web_token_12us}}",
+                  "type": "string"
+                }
+              ]
+            },
             "method": "GET",
             "header": [],
             "url": {
-              "raw": "{{base_url}}/api/v1/users/profile/",
+              "raw": "http://127.0.0.1:8000/api/v1/users/profile/",
+              "protocol": "http",
               "host": [
-                "{{base_url}}"
+                "127",
+                "0",
+                "0",
+                "1"
               ],
+              "port": "8000",
               "path": [
                 "api",
                 "v1",
@@ -167,45 +357,30 @@
                 "profile",
                 ""
               ]
-            },
-            "auth": {
-              "type": "bearer",
-              "bearer": [
-                {
-                  "key": "token",
-                  "value": "{{access_token}}",
-                  "type": "string"
-                }
-              ]
             }
           },
           "response": [
             {
-              "name": "Get profile - 200 OK",
+              "name": "get profile",
               "originalRequest": {
                 "method": "GET",
                 "header": [],
                 "url": {
-                  "raw": "{{base_url}}/api/v1/users/profile/",
+                  "raw": "http://127.0.0.1:8000/api/v1/users/profile/",
+                  "protocol": "http",
                   "host": [
-                    "{{base_url}}"
+                    "127",
+                    "0",
+                    "0",
+                    "1"
                   ],
+                  "port": "8000",
                   "path": [
                     "api",
                     "v1",
                     "users",
                     "profile",
                     ""
-                  ]
-                },
-                "auth": {
-                  "type": "bearer",
-                  "bearer": [
-                    {
-                      "key": "token",
-                      "value": "{{access_token}}",
-                      "type": "string"
-                    }
                   ]
                 }
               },
@@ -214,8 +389,44 @@
               "_postman_previewlanguage": "json",
               "header": [
                 {
+                  "key": "Date",
+                  "value": "Sun, 08 Nov 2026 21:21:05 GMT"
+                },
+                {
+                  "key": "Server",
+                  "value": "WSGIServer/0.2 CPython/3.12.2"
+                },
+                {
                   "key": "Content-Type",
                   "value": "application/json"
+                },
+                {
+                  "key": "Vary",
+                  "value": "Accept"
+                },
+                {
+                  "key": "Allow",
+                  "value": "GET, PUT, PATCH, HEAD, OPTIONS"
+                },
+                {
+                  "key": "X-Frame-Options",
+                  "value": "DENY"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "145"
+                },
+                {
+                  "key": "X-Content-Type-Options",
+                  "value": "nosniff"
+                },
+                {
+                  "key": "Referrer-Policy",
+                  "value": "same-origin"
+                },
+                {
+                  "key": "Cross-Origin-Opener-Policy",
+                  "value": "same-origin"
                 }
               ],
               "cookie": [],
@@ -224,15 +435,39 @@
           ]
         },
         {
-          "name": "Update Profile",
+          "name": "update profile",
           "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{json_web_token_12us}}",
+                  "type": "string"
+                }
+              ]
+            },
             "method": "PATCH",
             "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"phone_number\": \"09123456789\"    \r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
             "url": {
-              "raw": "{{base_url}}/api/v1/users/profile/",
+              "raw": "http://127.0.0.1:8000/api/v1/users/profile/",
+              "protocol": "http",
               "host": [
-                "{{base_url}}"
+                "127",
+                "0",
+                "0",
+                "1"
               ],
+              "port": "8000",
               "path": [
                 "api",
                 "v1",
@@ -240,38 +475,33 @@
                 "profile",
                 ""
               ]
-            },
-            "auth": {
-              "type": "bearer",
-              "bearer": [
-                {
-                  "key": "token",
-                  "value": "{{access_token}}",
-                  "type": "string"
-                }
-              ]
-            },
-            "body": {
-              "mode": "raw",
-              "raw": "{\n    \"phone_number\": \"09123456789\"\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
             }
           },
           "response": [
             {
-              "name": "Update profile - 200 OK",
+              "name": "update profile",
               "originalRequest": {
                 "method": "PATCH",
                 "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"phone_number\": \"09123456789\"    \r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
                 "url": {
-                  "raw": "{{base_url}}/api/v1/users/profile/",
+                  "raw": "http://127.0.0.1:8000/api/v1/users/profile/",
+                  "protocol": "http",
                   "host": [
-                    "{{base_url}}"
+                    "127",
+                    "0",
+                    "0",
+                    "1"
                   ],
+                  "port": "8000",
                   "path": [
                     "api",
                     "v1",
@@ -279,25 +509,6 @@
                     "profile",
                     ""
                   ]
-                },
-                "auth": {
-                  "type": "bearer",
-                  "bearer": [
-                    {
-                      "key": "token",
-                      "value": "{{access_token}}",
-                      "type": "string"
-                    }
-                  ]
-                },
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n    \"phone_number\": \"09123456789\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
                 }
               },
               "status": "OK",
@@ -305,8 +516,44 @@
               "_postman_previewlanguage": "json",
               "header": [
                 {
+                  "key": "Date",
+                  "value": "Sun, 08 Nov 2026 21:25:40 GMT"
+                },
+                {
+                  "key": "Server",
+                  "value": "WSGIServer/0.2 CPython/3.12.2"
+                },
+                {
                   "key": "Content-Type",
                   "value": "application/json"
+                },
+                {
+                  "key": "Vary",
+                  "value": "Accept"
+                },
+                {
+                  "key": "Allow",
+                  "value": "GET, PUT, PATCH, HEAD, OPTIONS"
+                },
+                {
+                  "key": "X-Frame-Options",
+                  "value": "DENY"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "156"
+                },
+                {
+                  "key": "X-Content-Type-Options",
+                  "value": "nosniff"
+                },
+                {
+                  "key": "Referrer-Policy",
+                  "value": "same-origin"
+                },
+                {
+                  "key": "Cross-Origin-Opener-Policy",
+                  "value": "same-origin"
                 }
               ],
               "cookie": [],
@@ -315,15 +562,29 @@
           ]
         },
         {
-          "name": "Refresh Token",
+          "name": "refresh token",
           "request": {
             "method": "POST",
             "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"refresh\": \"{{json_web_token_1924}}\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
             "url": {
-              "raw": "{{base_url}}/api/v1/users/token/refresh/",
+              "raw": "http://127.0.0.1:8000/api/v1/users/token/refresh/",
+              "protocol": "http",
               "host": [
-                "{{base_url}}"
+                "127",
+                "0",
+                "0",
+                "1"
               ],
+              "port": "8000",
               "path": [
                 "api",
                 "v1",
@@ -332,28 +593,33 @@
                 "refresh",
                 ""
               ]
-            },
-            "body": {
-              "mode": "raw",
-              "raw": "{\n    \"refresh\": \"{{refresh_token}}\"\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
             }
           },
           "response": [
             {
-              "name": "Refresh token - 200 OK",
+              "name": "refresh token",
               "originalRequest": {
                 "method": "POST",
                 "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"refresh\": \"{{json_web_token_1924}}\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
                 "url": {
-                  "raw": "{{base_url}}/api/v1/users/token/refresh/",
+                  "raw": "http://127.0.0.1:8000/api/v1/users/token/refresh/",
+                  "protocol": "http",
                   "host": [
-                    "{{base_url}}"
+                    "127",
+                    "0",
+                    "0",
+                    "1"
                   ],
+                  "port": "8000",
                   "path": [
                     "api",
                     "v1",
@@ -362,15 +628,6 @@
                     "refresh",
                     ""
                   ]
-                },
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n    \"refresh\": \"{{refresh_token}}\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
                 }
               },
               "status": "OK",
@@ -378,25 +635,75 @@
               "_postman_previewlanguage": "json",
               "header": [
                 {
+                  "key": "Date",
+                  "value": "Sun, 08 Nov 2026 21:28:15 GMT"
+                },
+                {
+                  "key": "Server",
+                  "value": "WSGIServer/0.2 CPython/3.12.2"
+                },
+                {
                   "key": "Content-Type",
                   "value": "application/json"
+                },
+                {
+                  "key": "Vary",
+                  "value": "Accept"
+                },
+                {
+                  "key": "Allow",
+                  "value": "POST, OPTIONS"
+                },
+                {
+                  "key": "X-Frame-Options",
+                  "value": "DENY"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "489"
+                },
+                {
+                  "key": "X-Content-Type-Options",
+                  "value": "nosniff"
+                },
+                {
+                  "key": "Referrer-Policy",
+                  "value": "same-origin"
+                },
+                {
+                  "key": "Cross-Origin-Opener-Policy",
+                  "value": "same-origin"
                 }
               ],
               "cookie": [],
-              "body": "{\n  \"access\": \"<NEW_ACCESS_TOKEN>\",\n  \"refresh\": \"<NEW_REFRESH_TOKEN>\"\n}"
+              "body": "{\n  \"access\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzk0MTc0MTk1LCJpYXQiOjE3OTQxNzMyOTUsImp0aSI6ImQ0ZTcwZWFjOWI0MDRmNDZiMjE5ZjBmZDAyMDMxZDE1IiwidXNlcl9pZCI6IjMifQ.XPW7GyaL1sTj9LtagzRFSYhDh6GG34HjOt7PuqRHzNY\",\n  \"refresh\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTc5NDc3ODA5NSwiaWF0IjoxNzk0MTczMjk1LCJqdGkiOiJmZDNlMjY2MmMyODY0OWFmYjFhYzhmY2M3NjFjYzQ4MiIsInVzZXJfaWQiOiIzIn0.q-tIoHmE5Zjv-835tqoJYYffrvdx5w6m_AAk5ZyEU0c\"\n}"
             }
           ]
         },
         {
-          "name": "Logout",
+          "name": "log out",
           "request": {
             "method": "POST",
             "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"refresh\": \"{{json_web_token_19ip}}\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
             "url": {
-              "raw": "{{base_url}}/api/v1/users/logout/",
+              "raw": "http://127.0.0.1:8000/api/v1/users/logout/",
+              "protocol": "http",
               "host": [
-                "{{base_url}}"
+                "127",
+                "0",
+                "0",
+                "1"
               ],
+              "port": "8000",
               "path": [
                 "api",
                 "v1",
@@ -404,28 +711,33 @@
                 "logout",
                 ""
               ]
-            },
-            "body": {
-              "mode": "raw",
-              "raw": "{\n    \"refresh\": \"{{refresh_token}}\"\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
             }
           },
           "response": [
             {
-              "name": "Logout - 205 Reset Content",
+              "name": "log out",
               "originalRequest": {
                 "method": "POST",
                 "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"refresh\": \"{{json_web_token_19ip}}\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
                 "url": {
-                  "raw": "{{base_url}}/api/v1/users/logout/",
+                  "raw": "http://127.0.0.1:8000/api/v1/users/logout/",
+                  "protocol": "http",
                   "host": [
-                    "{{base_url}}"
+                    "127",
+                    "0",
+                    "0",
+                    "1"
                   ],
+                  "port": "8000",
                   "path": [
                     "api",
                     "v1",
@@ -433,15 +745,6 @@
                     "logout",
                     ""
                   ]
-                },
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n    \"refresh\": \"{{refresh_token}}\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
                 }
               },
               "status": "Reset Content",
@@ -449,8 +752,44 @@
               "_postman_previewlanguage": "json",
               "header": [
                 {
+                  "key": "Date",
+                  "value": "Sun, 08 Nov 2026 21:35:57 GMT"
+                },
+                {
+                  "key": "Server",
+                  "value": "WSGIServer/0.2 CPython/3.12.2"
+                },
+                {
                   "key": "Content-Type",
                   "value": "application/json"
+                },
+                {
+                  "key": "Vary",
+                  "value": "Accept"
+                },
+                {
+                  "key": "Allow",
+                  "value": "POST, OPTIONS"
+                },
+                {
+                  "key": "X-Frame-Options",
+                  "value": "DENY"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "37"
+                },
+                {
+                  "key": "X-Content-Type-Options",
+                  "value": "nosniff"
+                },
+                {
+                  "key": "Referrer-Policy",
+                  "value": "same-origin"
+                },
+                {
+                  "key": "Cross-Origin-Opener-Policy",
+                  "value": "same-origin"
                 }
               ],
               "cookie": [],
@@ -459,24 +798,1348 @@
           ]
         }
       ]
+    },
+    {
+      "name": "Products",
+      "item": [
+        {
+          "name": "list products",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"phone_number\": \"09123456789\"    \r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://127.0.0.1:8000/api/v1/products/products/",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "v1",
+                "products",
+                "products",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "product detail",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"phone_number\": \"09123456789\"    \r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://127.0.0.1:8000/api/v1/products/products/3/",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "v1",
+                "products",
+                "products",
+                "3",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "search products",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"refresh\": \"{{json_web_token_19ip}}\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://127.0.0.1:8000/api/v1/products/products/?search=iphone",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "v1",
+                "products",
+                "products",
+                ""
+              ],
+              "query": [
+                {
+                  "key": "search",
+                  "value": "iphone"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "filter products",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"refresh\": \"{{json_web_token_1924}}\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://127.0.0.1:8000/api/v1/products/products/?min_price=10000000&max_price=50000000",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "v1",
+                "products",
+                "products",
+                ""
+              ],
+              "query": [
+                {
+                  "key": "min_price",
+                  "value": "10000000"
+                },
+                {
+                  "key": "max_price",
+                  "value": "50000000"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "list categories",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"refresh\": \"{{json_web_token_19ip}}\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://127.0.0.1:8000/api/v1/products/categories/",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "v1",
+                "products",
+                "categories",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "category detail",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"refresh\": \"{{json_web_token_19ip}}\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://127.0.0.1:8000/api/v1/products/categories/5/",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "v1",
+                "products",
+                "categories",
+                "5",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "list product images",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://127.0.0.1:8000/api/v1/products/product_images/",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "v1",
+                "products",
+                "product_images",
+                ""
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Cart",
+      "item": [
+        {
+          "name": "get cart",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": ""
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "add cart item",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{json_web_token_15rc}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"product_id\": 4,\r\n    \"quantity\": 2\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://127.0.0.1:8000/api/v1/cart/items/",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "v1",
+                "cart",
+                "items",
+                ""
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "add cart item",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"product_id\": 4,\r\n    \"quantity\": 2\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://127.0.0.1:8000/api/v1/cart/items/",
+                  "protocol": "http",
+                  "host": [
+                    "127",
+                    "0",
+                    "0",
+                    "1"
+                  ],
+                  "port": "8000",
+                  "path": [
+                    "api",
+                    "v1",
+                    "cart",
+                    "items",
+                    ""
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Date",
+                  "value": "Tue, 10 Nov 2026 15:33:18 GMT"
+                },
+                {
+                  "key": "Server",
+                  "value": "WSGIServer/0.2 CPython/3.12.2"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                },
+                {
+                  "key": "Vary",
+                  "value": "Accept"
+                },
+                {
+                  "key": "Allow",
+                  "value": "POST, OPTIONS"
+                },
+                {
+                  "key": "X-Frame-Options",
+                  "value": "DENY"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "440"
+                },
+                {
+                  "key": "X-Content-Type-Options",
+                  "value": "nosniff"
+                },
+                {
+                  "key": "Referrer-Policy",
+                  "value": "same-origin"
+                },
+                {
+                  "key": "Cross-Origin-Opener-Policy",
+                  "value": "same-origin"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"id\": 1,\n  \"product\": {\n    \"id\": 4,\n    \"name\": \"Samsung Galaxy S25\",\n    \"slug\": \"samsung-galaxy-s25\",\n    \"sku\": \"PRD-9BFBE8D41B2C4861949E4D0E496062F0\",\n    \"description\": \"Samsung Galaxy S25 smartphone.\",\n    \"price\": \"95000000\",\n    \"stock\": 12,\n    \"category\": 4,\n    \"is_active\": true,\n    \"created_at\": \"2026-11-09T18:28:21.507211+03:30\",\n    \"updated_at\": \"2026-11-09T18:28:21.507211+03:30\"\n  },\n  \"quantity\": 2,\n  \"created_at\": \"2026-11-10T19:03:18.188353+03:30\",\n  \"updated_at\": \"2026-11-10T19:03:18.188353+03:30\"\n}"
+            },
+            {
+              "name": "add cart item2",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"product_id\": 4,\r\n    \"quantity\": 1\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://127.0.0.1:8000/api/v1/cart/items/",
+                  "protocol": "http",
+                  "host": [
+                    "127",
+                    "0",
+                    "0",
+                    "1"
+                  ],
+                  "port": "8000",
+                  "path": [
+                    "api",
+                    "v1",
+                    "cart",
+                    "items",
+                    ""
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Date",
+                  "value": "Wed, 11 Nov 2026 16:07:28 GMT"
+                },
+                {
+                  "key": "Server",
+                  "value": "WSGIServer/0.2 CPython/3.12.2"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                },
+                {
+                  "key": "Vary",
+                  "value": "Accept"
+                },
+                {
+                  "key": "Allow",
+                  "value": "POST, OPTIONS"
+                },
+                {
+                  "key": "X-Frame-Options",
+                  "value": "DENY"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "440"
+                },
+                {
+                  "key": "X-Content-Type-Options",
+                  "value": "nosniff"
+                },
+                {
+                  "key": "Referrer-Policy",
+                  "value": "same-origin"
+                },
+                {
+                  "key": "Cross-Origin-Opener-Policy",
+                  "value": "same-origin"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"id\": 2,\n  \"product\": {\n    \"id\": 4,\n    \"name\": \"Samsung Galaxy S25\",\n    \"slug\": \"samsung-galaxy-s25\",\n    \"sku\": \"PRD-9BFBE8D41B2C4861949E4D0E496062F0\",\n    \"description\": \"Samsung Galaxy S25 smartphone.\",\n    \"price\": \"95000000\",\n    \"stock\": 12,\n    \"category\": 4,\n    \"is_active\": true,\n    \"created_at\": \"2026-11-09T18:28:21.507211+03:30\",\n    \"updated_at\": \"2026-11-09T18:28:21.507211+03:30\"\n  },\n  \"quantity\": 1,\n  \"created_at\": \"2026-11-11T19:37:28.755995+03:30\",\n  \"updated_at\": \"2026-11-11T19:37:28.755995+03:30\"\n}"
+            }
+          ]
+        },
+        {
+          "name": "update cart item",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{json_web_token_04fb}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"quantity\": 3  \r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://127.0.0.1:8000/api/v1/cart/items/1/",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "v1",
+                "cart",
+                "items",
+                "1",
+                ""
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "update cart item",
+              "originalRequest": {
+                "method": "PATCH",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"quantity\": 3  \r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://127.0.0.1:8000/api/v1/cart/items/1/",
+                  "protocol": "http",
+                  "host": [
+                    "127",
+                    "0",
+                    "0",
+                    "1"
+                  ],
+                  "port": "8000",
+                  "path": [
+                    "api",
+                    "v1",
+                    "cart",
+                    "items",
+                    "1",
+                    ""
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Date",
+                  "value": "Wed, 11 Nov 2026 15:55:02 GMT"
+                },
+                {
+                  "key": "Server",
+                  "value": "WSGIServer/0.2 CPython/3.12.2"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                },
+                {
+                  "key": "Vary",
+                  "value": "Accept"
+                },
+                {
+                  "key": "Allow",
+                  "value": "PUT, PATCH, OPTIONS"
+                },
+                {
+                  "key": "X-Frame-Options",
+                  "value": "DENY"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "440"
+                },
+                {
+                  "key": "X-Content-Type-Options",
+                  "value": "nosniff"
+                },
+                {
+                  "key": "Referrer-Policy",
+                  "value": "same-origin"
+                },
+                {
+                  "key": "Cross-Origin-Opener-Policy",
+                  "value": "same-origin"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"id\": 1,\n  \"product\": {\n    \"id\": 4,\n    \"name\": \"Samsung Galaxy S25\",\n    \"slug\": \"samsung-galaxy-s25\",\n    \"sku\": \"PRD-9BFBE8D41B2C4861949E4D0E496062F0\",\n    \"description\": \"Samsung Galaxy S25 smartphone.\",\n    \"price\": \"95000000\",\n    \"stock\": 12,\n    \"category\": 4,\n    \"is_active\": true,\n    \"created_at\": \"2026-11-09T18:28:21.507211+03:30\",\n    \"updated_at\": \"2026-11-09T18:28:21.507211+03:30\"\n  },\n  \"quantity\": 3,\n  \"created_at\": \"2026-11-10T19:03:18.188353+03:30\",\n  \"updated_at\": \"2026-11-11T19:25:02.843332+03:30\"\n}"
+            }
+          ]
+        },
+        {
+          "name": "delete cart item",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{json_web_token_04fb}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "http://127.0.0.1:8000/api/v1/cart/items/1/delete/",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "v1",
+                "cart",
+                "items",
+                "1",
+                "delete",
+                ""
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Orders",
+      "item": [
+        {
+          "name": "check out",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{json_web_token_0cnu}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"recipient_name\": \"Test Customer\",\r\n    \"phone_number\": \"09123456789\",\r\n    \"shipping_address\": \"Tehran, Test Street, No. 10\",\r\n    \"postal_code\": \"1234567890\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://127.0.0.1:8000/api/v1/orders/checkout/",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "v1",
+                "orders",
+                "checkout",
+                ""
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "check out",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"recipient_name\": \"Test Customer\",\r\n    \"phone_number\": \"09123456789\",\r\n    \"shipping_address\": \"Tehran, Test Street, No. 10\",\r\n    \"postal_code\": \"1234567890\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://127.0.0.1:8000/api/v1/orders/checkout/",
+                  "protocol": "http",
+                  "host": [
+                    "127",
+                    "0",
+                    "0",
+                    "1"
+                  ],
+                  "port": "8000",
+                  "path": [
+                    "api",
+                    "v1",
+                    "orders",
+                    "checkout",
+                    ""
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Date",
+                  "value": "Wed, 11 Nov 2026 16:14:26 GMT"
+                },
+                {
+                  "key": "Server",
+                  "value": "WSGIServer/0.2 CPython/3.12.2"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                },
+                {
+                  "key": "Vary",
+                  "value": "Accept"
+                },
+                {
+                  "key": "Allow",
+                  "value": "POST, OPTIONS"
+                },
+                {
+                  "key": "X-Frame-Options",
+                  "value": "DENY"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "161"
+                },
+                {
+                  "key": "X-Content-Type-Options",
+                  "value": "nosniff"
+                },
+                {
+                  "key": "Referrer-Policy",
+                  "value": "same-origin"
+                },
+                {
+                  "key": "Cross-Origin-Opener-Policy",
+                  "value": "same-origin"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"message\": \"Your order was created successfully.\",\n  \"order_id\": 1,\n  \"order_number\": \"2fd29af3-f788-4e39-8c54-b11f298e6ba9\",\n  \"total_price\": \"95000000\",\n  \"status\": \"pending\"\n}"
+            }
+          ]
+        },
+        {
+          "name": "order history",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{json_web_token_0cnu}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"product_id\": 4,\r\n    \"quantity\": 2\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://127.0.0.1:8000/api/v1/orders/history/",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "v1",
+                "orders",
+                "history",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "order detail",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{json_web_token_0cnu}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://127.0.0.1:8000/api/v1/orders/1/",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "v1",
+                "orders",
+                "1",
+                ""
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Payments",
+      "item": [
+        {
+          "name": "start payment",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{json_web_token_0xgk}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"username\": \"testuser2\",\r\n    \"password\": \"SUV120120\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://127.0.0.1:8000/api/v1/payments/start/1/",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "v1",
+                "payments",
+                "start",
+                "1",
+                ""
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "start payment",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"username\": \"testuser2\",\r\n    \"password\": \"SUV120120\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://127.0.0.1:8000/api/v1/payments/start/1/",
+                  "protocol": "http",
+                  "host": [
+                    "127",
+                    "0",
+                    "0",
+                    "1"
+                  ],
+                  "port": "8000",
+                  "path": [
+                    "api",
+                    "v1",
+                    "payments",
+                    "start",
+                    "1",
+                    ""
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Date",
+                  "value": "Wed, 11 Nov 2026 16:22:54 GMT"
+                },
+                {
+                  "key": "Server",
+                  "value": "WSGIServer/0.2 CPython/3.12.2"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                },
+                {
+                  "key": "Vary",
+                  "value": "Accept"
+                },
+                {
+                  "key": "Allow",
+                  "value": "POST, OPTIONS"
+                },
+                {
+                  "key": "X-Frame-Options",
+                  "value": "DENY"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "314"
+                },
+                {
+                  "key": "X-Content-Type-Options",
+                  "value": "nosniff"
+                },
+                {
+                  "key": "Referrer-Policy",
+                  "value": "same-origin"
+                },
+                {
+                  "key": "Cross-Origin-Opener-Policy",
+                  "value": "same-origin"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"payment\": {\n    \"id\": 1,\n    \"order_number\": \"2fd29af3-f788-4e39-8c54-b11f298e6ba9\",\n    \"amount\": \"95000000\",\n    \"provider\": \"zarinpal\",\n    \"status\": \"pending\",\n    \"transaction_id\": null,\n    \"created_at\": \"2026-11-11T19:52:53.534901+03:30\",\n    \"paid_at\": null\n  },\n  \"payment_url\": \"https://sandbox.zarinpal.com/pg/StartPay/S0000000000000000000000000000033l7rg\"\n}"
+            }
+          ]
+        },
+        {
+          "name": "verify payment result",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://127.0.0.1:8000/api/v1/payments/verify/?Authority=S0000000000000000000000000000033l7rg&Status=OK",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "v1",
+                "payments",
+                "verify",
+                ""
+              ],
+              "query": [
+                {
+                  "key": "Authority",
+                  "value": "S0000000000000000000000000000033l7rg"
+                },
+                {
+                  "key": "Status",
+                  "value": "OK"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "verify payment result",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "http://127.0.0.1:8000/api/v1/payments/verify/?Authority=S0000000000000000000000000000033l7rg&Status=OK",
+                  "protocol": "http",
+                  "host": [
+                    "127",
+                    "0",
+                    "0",
+                    "1"
+                  ],
+                  "port": "8000",
+                  "path": [
+                    "api",
+                    "v1",
+                    "payments",
+                    "verify",
+                    ""
+                  ],
+                  "query": [
+                    {
+                      "key": "Authority",
+                      "value": "S0000000000000000000000000000033l7rg"
+                    },
+                    {
+                      "key": "Status",
+                      "value": "OK"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Date",
+                  "value": "Wed, 11 Nov 2026 16:27:26 GMT"
+                },
+                {
+                  "key": "Server",
+                  "value": "WSGIServer/0.2 CPython/3.12.2"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                },
+                {
+                  "key": "Vary",
+                  "value": "Accept"
+                },
+                {
+                  "key": "Allow",
+                  "value": "GET, HEAD, OPTIONS"
+                },
+                {
+                  "key": "X-Frame-Options",
+                  "value": "DENY"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "300"
+                },
+                {
+                  "key": "X-Content-Type-Options",
+                  "value": "nosniff"
+                },
+                {
+                  "key": "Referrer-Policy",
+                  "value": "same-origin"
+                },
+                {
+                  "key": "Cross-Origin-Opener-Policy",
+                  "value": "same-origin"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"detail\": \"Payment was already verified.\",\n  \"payment\": {\n    \"id\": 1,\n    \"order_number\": \"2fd29af3-f788-4e39-8c54-b11f298e6ba9\",\n    \"amount\": \"95000000\",\n    \"provider\": \"zarinpal\",\n    \"status\": \"successful\",\n    \"transaction_id\": \"40306901\",\n    \"created_at\": \"2026-11-11T19:52:53.534901+03:30\",\n    \"paid_at\": \"2026-11-11T19:55:01.026708+03:30\"\n  }\n}"
+            }
+          ]
+        },
+        {
+          "name": "order after payment",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{json_web_token_0xgk}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://127.0.0.1:8000/api/v1/orders/1/",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "v1",
+                "orders",
+                "1",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "duplicate payment prevention",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{json_web_token_0xgk}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"username\": \"testuser2\",\r\n    \"password\": \"SUV120120\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://127.0.0.1:8000/api/v1/payments/start/1/",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "v1",
+                "payments",
+                "start",
+                "1",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "unauthorized payment start",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"username\": \"testuser2\",\r\n    \"password\": \"SUV120120\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://127.0.0.1:8000/api/v1/payments/start/1/",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "v1",
+                "payments",
+                "start",
+                "1",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "payment for nonexistent",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{json_web_token_0xgk}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"username\": \"testuser2\",\r\n    \"password\": \"SUV120120\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://127.0.0.1:8000/api/v1/payments/start/999999/",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "v1",
+                "payments",
+                "start",
+                "999999",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "missing authority",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://127.0.0.1:8000/api/v1/payments/verify/?Status=OK",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "v1",
+                "payments",
+                "verify",
+                ""
+              ],
+              "query": [
+                {
+                  "key": "Status",
+                  "value": "OK"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
     }
   ],
   "variable": [
     {
-      "key": "base_url",
-      "value": "http://127.0.0.1:8000"
+      "key": "json_web_token_12us",
+      "secret": true
     },
     {
-      "key": "test_password",
-      "value": ""
+      "key": "json_web_token_1924",
+      "secret": true
     },
     {
-      "key": "access_token",
-      "value": ""
+      "key": "json_web_token_19ip",
+      "secret": true
     },
     {
-      "key": "refresh_token",
-      "value": ""
+      "key": "json_web_token_15rc",
+      "secret": true
+    },
+    {
+      "key": "json_web_token_04fb",
+      "secret": true
+    },
+    {
+      "key": "json_web_token_0cnu",
+      "secret": true
+    },
+    {
+      "key": "json_web_token_0xgk",
+      "secret": true
     }
   ]
 }
