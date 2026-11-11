@@ -24,7 +24,26 @@ ALLOWED_HOSTS = [
     if host.strip()
 ]
 
+# Zarinpal payment gateway configuration
+ZARINPAL_MERCHANT_ID = os.getenv('ZARINPAL_MERCHANT_ID')
 
+ZARINPAL_CALLBACK_URL = os.getenv(
+    'ZARINPAL_CALLBACK_URL',
+    'http://127.0.0.1:8000/api/v1/payments/verify/'
+)
+
+# Use sandbox endpoints during development.
+ZARINPAL_REQUEST_URL = (
+    'https://sandbox.zarinpal.com/pg/v4/payment/request.json'
+)
+
+ZARINPAL_VERIFY_URL = (
+    'https://sandbox.zarinpal.com/pg/v4/payment/verify.json'
+)
+
+ZARINPAL_STARTPAY_URL = (
+    'https://sandbox.zarinpal.com/pg/StartPay/'
+)
 
 INSTALLED_APPS = [
     #Django

@@ -1,4 +1,3 @@
-
 from django.core.exceptions import ValidationError
 from django.db import transaction
 from django.utils import timezone
@@ -14,16 +13,19 @@ def create_payment_attempt(user, order_id):
         user=user
     )
 
+    #only pending orders can be paid
     if order.status != Order.Status.PENDING:
         raise ValidationError(
             'This order is not available for payment.'
         )
 
+    #the order amount must be greater than zero
     if order.total_price <= 0:
         raise ValidationError(
             'Order total price must be greater than zero.'
         )
 
+    #prevent creating another payment for an already paid order
     if order.payments.filter(
         status=Payment.Status.SUCCESSFUL
     ).exists():
@@ -31,6 +33,21 @@ def create_payment_attempt(user, order_id):
             'This order has already been paid.'
         )
 
+    #check whether an unfinished payment attempt already exists
+
+    existing_payment = order.payments.select_for_update().filter(
+        status=Payment.Status.PENDING).order_by('-created_at').first()
+
+    if existing_payment:
+        # Reuse an existing payment if it already has a gateway authority.
+        if existing_payment.authority:
+            return existing_payment
+        #dont create another attempt while the first one is processing
+        raise ValidationError(
+            'A payment attempt is already being processed.'
+        )
+    
+    #create a new payment attempt
     payment = Payment(
         order=order,
         amount=order.total_price,
@@ -42,22 +59,26 @@ def create_payment_attempt(user, order_id):
 
     return payment
 
-
 @transaction.atomic
 def mark_payment_successful(payment_id, transaction_id):
+    # Read the order ID before locking the related records.
     payment_info = Payment.objects.only(
         'order_id'
     ).get(pk=payment_id)
 
+    # Lock the order first to prevent concurrent payment updates.
     order = Order.objects.select_for_update().get(
         pk=payment_info.order_id
     )
 
+    # Lock the payment while updating its status.
     payment = Payment.objects.select_for_update().get(
         pk=payment_id,
         order=order
     )
 
+    # Make the operation idempotent.
+    # Repeated callbacks must not update an already successful payment.
     if payment.status == Payment.Status.SUCCESSFUL:
         return payment
 
@@ -66,11 +87,13 @@ def mark_payment_successful(payment_id, transaction_id):
             'This payment has already been refunded.'
         )
 
+    # Only pending payments can become successful.
     if payment.status != Payment.Status.PENDING:
         raise ValidationError(
             'This payment is not pending.'
         )
 
+    # Prevent a second successful payment for the same order.
     if order.payments.filter(
         status=Payment.Status.SUCCESSFUL
     ).exclude(pk=payment.pk).exists():
@@ -78,6 +101,7 @@ def mark_payment_successful(payment_id, transaction_id):
             'Another payment for this order is already successful.'
         )
 
+    # Save the confirmed transaction details.
     payment.status = Payment.Status.SUCCESSFUL
     payment.transaction_id = transaction_id
     payment.paid_at = timezone.now()
@@ -89,6 +113,7 @@ def mark_payment_successful(payment_id, transaction_id):
         'updated_at'
     ])
 
+    # Move a pending order to processing after successful payment.
     if order.status == Order.Status.PENDING:
         order.status = Order.Status.PROCESSING
         order.save(update_fields=[
@@ -96,8 +121,11 @@ def mark_payment_successful(payment_id, transaction_id):
             'updated_at'
         ])
 
-    return payment
+    # If an order was cancelled before the callback arrived,
+    # keep its cancelled status. The successful payment must still
+    # be recorded and handled separately for a possible refund.
 
+    return payment
 
 @transaction.atomic
 def mark_payment_failed(payment_id, transaction_id=None):

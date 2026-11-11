@@ -36,6 +36,15 @@ class Payment(models.Model):
         default= Provider.ZARINPAL
     )
 
+    #unique identifier returned by zarinpal when payment is requested
+    #later it is used to verify the payment callback
+    authority = models.CharField(
+        max_length=100,
+        blank=True,
+        null=True,
+        unique=True
+    )
+
     transaction_id = models.CharField(
         max_length=100,
         blank=True,
